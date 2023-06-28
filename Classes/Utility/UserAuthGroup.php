@@ -226,7 +226,7 @@ class UserAuthGroup
             $aclAllowed[] = $result;
         }
 
-        if ($aclAllowed) {
+        if (isset($aclAllowed)) {
 
             // get all "deny" acls if there are allow ACLs
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_beacl_acl');
