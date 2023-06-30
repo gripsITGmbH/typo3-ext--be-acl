@@ -373,7 +373,7 @@ class PermissionController extends \TYPO3\CMS\Beuser\Controller\PermissionContro
 
             $currentSelectionOverride_raw = GeneralUtility::_GP('tx_beacl_objsel');
             $currentSelectionOverride = array();
-            if (is_array($currentSelectionOverride_raw[$type])) {
+            if (is_array($currentSelectionOverride_raw[$type] ?? '')) {
                 foreach ($currentSelectionOverride_raw[$type] as $tmp) {
                     $currentSelectionOverride[$tmp] = $tmp;
                 }
@@ -478,7 +478,7 @@ class PermissionController extends \TYPO3\CMS\Beuser\Controller\PermissionContro
         }
 
         foreach ($this->aclTypes as $type) {
-            $pageData['meta'][$type]['inherited'] = (isset($pageData[$type]) && is_array($pageData[$type])) ? count($pageData[$type]) : 0;
+            $pageData['meta'][$type]['inherited'] = (is_array($pageData[$type] ?? '') ? count($pageData[$type]) : 0);
         }
     }
 
@@ -524,7 +524,7 @@ class PermissionController extends \TYPO3\CMS\Beuser\Controller\PermissionContro
                 $parentACLs[$result['type']][$result['object_id']] = $aclData;
                 // If there also is a non-recursive ACL for this object_id, that takes precedence
                 // for this page. Otherwise, add it to the ACL list.
-                if (is_array($hasNoRecursive[$pageId][$result['type']][$result['object_id']])) {
+                if (is_array($hasNoRecursive[$pageId][$result['type']][$result['object_id']] ?? '')) {
                     $this->aclList[$pageId][$result['type']][$result['object_id']] = $hasNoRecursive[$pageId][$result['type']][$result['object_id']];
                 } else {
                     $this->aclList[$pageId][$result['type']][$result['object_id']] = $aclData;

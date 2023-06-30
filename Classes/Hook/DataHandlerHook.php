@@ -138,7 +138,7 @@ class DataHandlerHook
             /**
              * Case #2 - We are editing the page in default language, so translation gets updated too
              */
-            $currentRecordUid = (integer)$dataHandler->checkValue_currentRecord['uid'];
+            $currentRecordUid = (integer)($dataHandler->checkValue_currentRecord['uid'] ?? 0);
             if ($currentRecordUid != 0 && $currentRecordUid != $id) {
                 return true;
             }
